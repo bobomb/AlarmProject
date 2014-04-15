@@ -6,13 +6,17 @@
 // mjamal1@fau.edu
 //**********************************************************/
 
-module keypad(clk, keypad_buttons, reset_shift, keypad_values, shift_pulse);
-  input clk;
-  input [9:0] keypad_buttons;
-  input reset_shift;
-  output reg[15:0] keypad_values;
-  output reg shift_pulse;
+module keypad(
+  input clk, 
+  input [9:0] keypad_buttons, 
+  input reset_shift, 
+  output reg[15:0] keypad_values,
+  output reg shift_pulse
+  );
+  //holds state of the keypad
   reg state;
+  //holds decoded value of keypad button to be clocked into shift register when
+  //keypad button transitions from 1 to 0
   reg[3:0] keypad_decoded;
   parameter INITIAL_STATE = 0;
   parameter SHIFT_IN = 1;
