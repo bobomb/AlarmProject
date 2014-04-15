@@ -25,7 +25,7 @@ initial begin
   minutes = 0;
 end
 
-always@(set_time) begin
+always@(posedge set_time) begin
   //set hours to minute most sig * 10 + minute least sig
   hours = (new_time[15:12] * 10) + new_time[11:8];
   minutes = (new_time[7:4] * 10) + new_time[3:0];

@@ -7,7 +7,7 @@
 //**********************************************************/
 
 module sevensegment(
-  input[3:0] number //4bit number representing the digit
+  input[3:0] number, //4bit number representing the digit
   output reg [6:0] display //output is a 7 segment bit array
   );
 
