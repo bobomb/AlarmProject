@@ -6,9 +6,10 @@
 // mjamal1@fau.edu
 //**********************************************************/
 
-module sevensegment(number, display);
-input[3:0] number;
-output reg [6:0] display;
+module sevensegment(
+  input[3:0] number //4bit number representing the digit
+  output reg [6:0] display //output is a 7 segment bit array
+  );
 
 parameter one_seg =   7'b0110000;
 parameter two_seg =   7'b1011011;

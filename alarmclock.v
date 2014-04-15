@@ -67,13 +67,15 @@ initial begin
 end
 
 always@(reset, one_second, alarm_button, time_button, keypad_shift_pulse) begin
+  //handle reset
   if(reset == 1) begin
     selector = 2'b00; //reset the display mux selector
     alarm_time = {4'h1, 4'h2, 4'h0, 4'h0}; //alarm time set for 12:00 by default
   end
   
-  
+  //main state machine
 end
+
 initial begin
   //this is the output of the display muxes 4 digits
   $monitor($time," \n %c\t %c\t %c\t %c\n%c%c%c\t%c%c%c\t%c%c%c\t%c%c%c\n%c%c%c\t%c%c%c\t%c%c%c\t%c%c%c\n" ,
