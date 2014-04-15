@@ -14,8 +14,7 @@ module countinglogic(
   input wire one_minute,
   input wire reset,
   input wire set_time,
-  input reg[5:0] new_time_hr,
-  input reg[5:0] new_time_min,
+  input reg[15:0] new_time,
   output reg[15:0] display_value
   );
 reg[4:0] hours; //5 bits since hours goes to 24 (5 bit value can hold up to 32)
@@ -27,8 +26,10 @@ initial begin
 end
 
 always@(set_time) begin
-  hours = new_time_hr;
-  minutes = new_time_min;
+  //set hours to minute most sig * 10 + minute least sig
+  hours = (new_time[15:12] * 10) + new_time[11:8];
+  minutes = (new_time[7:4] * 10) + new_time[3:0];
+  
     //figure out the hours digits here
   if(hours < 10) begin
     //diplsays 00, 01, 02, 03, 04, 05, 06, 07, 08, 09

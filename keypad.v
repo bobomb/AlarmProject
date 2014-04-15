@@ -22,6 +22,7 @@ module keypad(clk, keypad_buttons, reset_shift, keypad_values, shift_pulse);
   initial begin
     state = INITIAL_STATE;
     keypad_decoded = 0;
+    shift_pulse = 0;
   end
   
   //reset  to blank segments the output values

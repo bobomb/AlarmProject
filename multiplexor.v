@@ -22,25 +22,25 @@ module multiplexor(
   output reg[3:0] segment_2, 
   output reg[3:0] segment_3
   );
-parameter SHOW_CURRENT = 2'h0;
-parameter SHOW_ALARM = 2'h1;
-parameter SHOW_KEYPAD = 2'h2;
+parameter DISP_SHOW_CURRENT = 2'h0;
+parameter DISP_SHOW_ALARM = 2'h1;
+parameter DISP_SHOW_KEYPAD = 2'h2;
 
 always@(selector, current_time, alarm_time, keypad_time) begin
   case(selector)
-    SHOW_CURRENT : begin
+    DISP_SHOW_CURRENT : begin
       segment_0 <= current_time[3:0];
       segment_1 <= current_time[7:4];
       segment_2 <= current_time[11:8];
       segment_3 <= current_time[15:12];
     end
-    SHOW_ALARM : begin
+    DISP_SHOW_ALARM : begin
       segment_0 <= alarm_time[3:0];
       segment_1 <= alarm_time[7:4];
       segment_2 <= alarm_time[11:8];
       segment_3 <= alarm_time[15:12];
     end
-    SHOW_KEYPAD : begin
+    DISP_SHOW_KEYPAD : begin
       segment_0 <= keypad_time[3:0];
       segment_1 <= keypad_time[7:4];
       segment_2 <= keypad_time[11:8];

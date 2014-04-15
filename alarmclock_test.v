@@ -7,11 +7,11 @@
 //**********************************************************/
 
 module alarmclock_test();
-  wire clk;
-  wire reset;
-  wire alarm_button;
-  wire time_button;
-  wire[9:0] keypad_buttons;
+  reg clk;
+  reg reset;
+  reg alarm_button;
+  reg time_button;
+  reg[9:0] keypad_buttons;
   alarmclock clock(
   clk, 
   reset,
@@ -19,4 +19,18 @@ module alarmclock_test();
   time_button,
   keypad_buttons
 );
+
+initial begin
+//first wait 6,666,240 (434 minutes or 7:14 time)
+keypad_buttons = 9'h0;
+alarm_button = 0;
+time_button = 0;
+#1 reset = 0;
+#1 reset = 1;
+//first wait 6,666,240 (434 minutes or 7:14 time) then reset
+#6666239 reset = 0;
+#1 reset = 0;
+
+//keypad simulate pressing of 4:35 and setting the current time to that
+end
 endmodule
