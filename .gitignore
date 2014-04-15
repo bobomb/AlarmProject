@@ -1,0 +1,84 @@
+# ignore emacs
+*~
+.#*
+\#*
+
+# Assembled files
+*.img
+*.lst
+*.list
+
+*.svf
+synth
+
+# Outputs
+*.out
+*.log
+dumpfile
+*.ptrace
+*.trace
+*.dmem
+*.reg
+
+
+# Vim 
+*.swp
+*.swo
+
+# ignore project files
+*.mpf
+*.mti
+
+# Ignore libraries
+work
+
+# ignore ModelSim generated files and directories (temp files and so on)
+[_@]*
+
+# ignore compilation output of ModelSim
+*.mti
+*.dat
+*.dbs
+*.psm
+*.bak
+*.cmp
+*.jpg
+*.html
+*.bsf
+
+# ignore simulation output of ModelSim
+wlf*
+*.wlf
+*.vstf
+*.ucdb
+cov*/
+transcript*
+sc_dpiheader.h
+vsim.dbg
+*.vcd
+# quartus
+# => ignore file by extension.
+#.gitignore
+*.rpt
+*.qdf
+*.done
+*.dpf
+*.summary
+*.pin
+*.pof#
+*.qpf#
+*.qsf
+*.qws
+*.sof
+*.smsg
+db/
+incremental_db/
+simulation/
+
+# => excludes *.sof from ignoring.#!
+*.sof!
+*.qpf!
+*.qsf
+
+# ignore dumpfile from halt
+bench/dumpfile*
