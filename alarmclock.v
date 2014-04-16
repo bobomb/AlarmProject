@@ -30,7 +30,7 @@ wire[3:0] segment_0, segment_1, segment_2, segment_3;
 //7 segment display outputs
 wire[6:0] s0_disp, s1_disp, s2_disp, s3_disp;
 //tells the keypad if we want to reset the shift register
-wire keypad_reset_shift;
+reg keypad_reset_shift;
 //pulse that occurs when the keypad gets a button press and shifts a value in
 wire keypad_shift_pulse;
 //holds values when combined with set_new_time to set the time in the counting logic
@@ -84,9 +84,9 @@ always@(reset, one_second, alarm_button, time_button, keypad_shift_pulse) begin
   //main state machine
   case(current_state)
     STATE_CURRENT_TIME : begin
-      //reset the set new time
+      //reset the set new time and kp 
       set_new_time = 0;
-      
+      keypad_reset_shift = 0;
       selector = DISP_SHOW_CURRENT;
       //alarm button means show the alarm time
       if(alarm_button) begin
@@ -94,6 +94,8 @@ always@(reset, one_second, alarm_button, time_button, keypad_shift_pulse) begin
       end
       
       if(keypad_shift_pulse) begin
+        //reset our ten second counter, show the keypad
+        ten_second_counter = 0;
         current_state = STATE_DISPLAY_KEYPAD;
       end
     end
@@ -103,13 +105,28 @@ always@(reset, one_second, alarm_button, time_button, keypad_shift_pulse) begin
         ten_second_counter = ten_second_counter + 1;
       end
       
+      //check if we hit the 10 second mark
+      if(ten_second_counter == 10) begin
+        ten_second_counter = 0;
+        //reset keypad
+        keypad_reset_shift = 1;
+        current_state = STATE_CURRENT_TIME;
+      end
+      
       //check if time needs to be set
       if(time_button) begin
         new_time = keypad_time;
         set_new_time = 1;
+        keypad_reset_shift = 1;
         current_state = STATE_CURRENT_TIME;
       end
       
+      //check if alarm needs to be set
+      if(alarm_button) begin
+        alarm_time = keypad_time;
+        keypad_reset_shift = 1;
+        current_state = STATE_CURRENT_TIME;
+      end
     end
     STATE_DISPLAY_ALARM : begin
       selector = DISP_SHOW_ALARM;

@@ -30,7 +30,7 @@ module keypad(
   end
   
   //reset  to blank segments the output values
-  always@(reset_shift) begin
+  always@(posedge reset_shift) begin
     keypad_values <= {4'ha, 4'ha, 4'ha, 4'ha};
   end
   
