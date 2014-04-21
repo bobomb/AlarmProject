@@ -10,11 +10,13 @@
 //with the period of 256 clocks = 1 second
 //generates a 1 clock pulse every second
 //and also a 1 clock pulse every minute
-module timing_generator(clock, reset, one_second, one_minute);
-  input clock;
-  input reset;
-  output reg one_second;
-  output reg one_minute;
+module timing_generator(
+  input clock, 
+  input reset, 
+  output reg one_second, 
+  output reg one_minute
+  );
+  
   reg[7:0] pulse_counter;
   reg[6:0] second_counter;
   
